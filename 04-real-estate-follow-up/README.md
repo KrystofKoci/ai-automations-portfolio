@@ -7,7 +7,7 @@ Follows up every buyer lead on day 1, 3 and 7 and stops the moment the lead repl
 
 **What it replaces:** The follow-up the agent keeps meaning to send.
 
-![Workflow after a manual run in n8n](screenshot.jpg)
+![Workflow after a manual run in n8n](screenshot.png)
 
 ## Flow
 
@@ -44,7 +44,7 @@ Full output is in `sample-output.json`. Dates in the sample data are generated r
 - `workflow.json`: n8n workflow, import and press *Manual run*
 - `sample-data.json`: the records used in the demo
 - `sample-output.json`: what the run produces
-- `screenshot.jpg`: the workflow in n8n after a manual run
+- `screenshot.png`: the workflow in n8n after a manual run
 
 ## Skeleton, not production
 
