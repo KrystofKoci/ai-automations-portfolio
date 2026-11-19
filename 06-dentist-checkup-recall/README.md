@@ -7,6 +7,8 @@ Finds patients whose last checkup was six or more months ago and who have nothin
 
 **What it replaces:** The recall list nobody at reception has time to call.
 
+![Workflow after a manual run in n8n](screenshot.jpg)
+
 ## Flow
 
 ```mermaid
@@ -42,6 +44,7 @@ Full output is in `sample-output.json`. Dates in the sample data are generated r
 - `workflow.json`: n8n workflow, import and press *Manual run*
 - `sample-data.json`: the records used in the demo
 - `sample-output.json`: what the run produces
+- `screenshot.jpg`: the workflow in n8n after a manual run
 
 ## Skeleton, not production
 
