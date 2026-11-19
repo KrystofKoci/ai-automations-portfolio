@@ -1,0 +1,63 @@
+{
+  "skipped": [
+    {
+      "id": "R-04",
+      "reason": "already answered"
+    }
+  ],
+  "drafts": [
+    {
+      "id": "R-01",
+      "reason": "positive review without a reply",
+      "to": "google",
+      "subject": "Reply to 5-star review",
+      "approval": "owner_approves",
+      "message": "Dear Helen, thank you for the kind words. We are glad you enjoyed your visit and look forward to seeing you again."
+    },
+    {
+      "id": "R-02",
+      "reason": "negative review without a reply",
+      "to": "google",
+      "subject": "Reply to 2-star review",
+      "approval": "owner_approves",
+      "message": "Dear Jon, thank you for telling us. A wait like that is not the evening we want anyone to have, and I am sorry. Please write to hello@example.com so I can put it right personally."
+    },
+    {
+      "id": "R-03",
+      "reason": "positive review without a reply",
+      "to": "tripadvisor",
+      "subject": "Reply to 4-star review",
+      "approval": "owner_approves",
+      "message": "Dear Mia, thank you for the kind words. We are glad you enjoyed your visit and look forward to seeing you again."
+    }
+  ],
+  "log": [
+    {
+      "logged_at": "2026-11-19T14:38:23.854Z",
+      "automation": "03-restaurant-reputation",
+      "record_id": "R-01",
+      "to": null,
+      "subject": "Reply to 5-star review",
+      "approval": "owner_approves",
+      "status": "draft_ready"
+    },
+    {
+      "logged_at": "2026-11-19T14:38:23.854Z",
+      "automation": "03-restaurant-reputation",
+      "record_id": "R-02",
+      "to": null,
+      "subject": "Reply to 2-star review",
+      "approval": "owner_approves",
+      "status": "draft_ready"
+    },
+    {
+      "logged_at": "2026-11-19T14:38:23.854Z",
+      "automation": "03-restaurant-reputation",
+      "record_id": "R-03",
+      "to": null,
+      "subject": "Reply to 4-star review",
+      "approval": "owner_approves",
+      "status": "draft_ready"
+    }
+  ]
+}

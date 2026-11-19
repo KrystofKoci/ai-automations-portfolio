@@ -1,0 +1,54 @@
+{
+  "skipped": [
+    {
+      "id": "P-02",
+      "reason": "not due yet"
+    },
+    {
+      "id": "P-03",
+      "reason": "already booked"
+    },
+    {
+      "id": "P-05",
+      "reason": "no consent to be contacted"
+    }
+  ],
+  "drafts": [
+    {
+      "id": "P-01",
+      "reason": "6 months since last checkup",
+      "to": "olga@example.com",
+      "subject": "Time for your checkup",
+      "approval": "auto_send",
+      "message": "Hi Olga, it has been 6 months since your last checkup at Maple Street Dental. You can pick a time here: https://example.com/book or reply with a day that suits you. This message was prepared by an automated assistant."
+    },
+    {
+      "id": "P-04",
+      "reason": "13 months since last checkup",
+      "to": "hugo@example.com",
+      "subject": "Time for your checkup",
+      "approval": "auto_send",
+      "message": "Hi Hugo, it has been 13 months since your last checkup at Maple Street Dental. You can pick a time here: https://example.com/book or reply with a day that suits you. This message was prepared by an automated assistant."
+    }
+  ],
+  "log": [
+    {
+      "logged_at": "2026-11-19T14:38:23.857Z",
+      "automation": "06-dentist-checkup-recall",
+      "record_id": "P-01",
+      "to": "olga@example.com",
+      "subject": "Time for your checkup",
+      "approval": "auto_send",
+      "status": "draft_ready"
+    },
+    {
+      "logged_at": "2026-11-19T14:38:23.857Z",
+      "automation": "06-dentist-checkup-recall",
+      "record_id": "P-04",
+      "to": "hugo@example.com",
+      "subject": "Time for your checkup",
+      "approval": "auto_send",
+      "status": "draft_ready"
+    }
+  ]
+}

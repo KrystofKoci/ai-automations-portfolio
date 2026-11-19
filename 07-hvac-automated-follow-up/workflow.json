@@ -1,0 +1,256 @@
+{
+  "name": "HVAC - Automated follow-ups",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## HVAC - Automated follow-ups\n**Sells:** Automated follow-ups\n\nChases quotes that got no answer after three days and reminds past customers when annual maintenance is due.\n\nRun *Manual run* to execute on the built-in sample data. No credentials needed.\n\nTo go live: replace *Sample data* with the real source, *Draft message* with an LLM call, and the placeholder nodes with real send / approval steps.",
+        "height": 240,
+        "width": 620
+      },
+      "id": "15e4e095-3889-5595-8fc2-1af1ff25d309",
+      "name": "About",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -280
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "30b7d8ba-54ed-5649-b351-30e7134fdf04",
+      "name": "Manual run",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {}
+          ]
+        }
+      },
+      "id": "d104d14e-e5e0-513b-9d56-8d6087c16de6",
+      "name": "Every morning (live trigger)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const d = n => new Date(Date.now() - n*86400000).toISOString().slice(0,10);\nconst daysSince = s => Math.floor((Date.now() - new Date(s).getTime())/86400000);\nreturn [\n {id:'Q-501', type:'quote', name:'Rob Hale', email:'rob@example.com', job:'heat pump installation', amount:8400, sent:d(4), status:'sent'},\n {id:'Q-502', type:'quote', name:'Eva Stone', email:'eva@example.com', job:'AC replacement', amount:5200, sent:d(1), status:'sent'},\n {id:'Q-503', type:'quote', name:'Dan Price', email:'dan@example.com', job:'furnace repair', amount:650, sent:d(6), status:'accepted'},\n {id:'S-301', type:'service', name:'Jill Moore', email:'jill@example.com', job:'boiler', last_service:d(350)},\n {id:'S-302', type:'service', name:'Ken Abe', email:'ken@example.com', job:'AC unit', last_service:d(120)}\n].map(json => ({json}));"
+      },
+      "id": "125fdf04-bc2d-50d0-b103-9f30d6c17f1e",
+      "name": "Sample data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const d = n => new Date(Date.now() - n*86400000).toISOString().slice(0,10);\nconst daysSince = s => Math.floor((Date.now() - new Date(s).getTime())/86400000);\nreturn $input.all().map(({json}) => {\n if (json.type === 'quote') {\n  const days = daysSince(json.sent);\n  const due = json.status === 'sent' && days >= 3;\n  return {json: {...json, action:'quote_follow_up', days_open: days, needs_action: due, reason: json.status !== 'sent' ? `quote ${json.status}` : due ? `quote unanswered for ${days} days` : 'quote sent recently'}};\n }\n const days = daysSince(json.last_service);\n const due = days >= 335;\n return {json: {...json, action:'annual_maintenance', days_since_service: days, needs_action: due, reason: due ? 'annual maintenance due' : 'serviced recently'}};\n});"
+      },
+      "id": "ea08e950-5ae0-5095-b6c0-b2cbd67299aa",
+      "name": "Rules",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.needs_action }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "1f74423c-0309-55c0-abdc-2c8be19f1f92",
+      "name": "Needs action?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        720,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $input.all().map(({json}) => {\n const first = json.name.split(' ')[0];\n const message = json.action === 'quote_follow_up'\n  ? `Hi ${first}, I wanted to check you received our quote for the ${json.job}. Any questions about the price or timing? Reply here and I will answer the same day. This message was prepared by an automated assistant.`\n  : `Hi ${first}, your ${json.job} is due for its yearly service. Reply with a day that suits you and we will send a technician. This message was prepared by an automated assistant.`;\n const subject = json.action === 'quote_follow_up' ? `Your quote: ${json.job}` : `Yearly service for your ${json.job}`;\n return {json: {...json, channel:'email', to: json.email, subject, message, approval:'auto_send'}};\n});"
+      },
+      "id": "dd5d9b5d-2fdc-541e-9a6c-be8a55976e04",
+      "name": "Draft message (mock AI)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        0
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "7c4cfddb-3af5-58db-8303-2a524ca30aa7",
+      "name": "Owner approval (placeholder)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        0
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "54688bd4-7d03-56a0-b33f-b5a34cc8bc8f",
+      "name": "Send (placeholder)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $input.all().map(({json}) => ({json: {logged_at: new Date().toISOString(), automation: '07-hvac-automated-follow-up', record_id: json.id, to: json.to || null, subject: json.subject, approval: json.approval, status: 'draft_ready'}}));"
+      },
+      "id": "5560dd1a-6559-52c6-b518-930639af94f8",
+      "name": "Log",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1680,
+        0
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "0af1d4f6-a877-5d4e-9e36-438abb206617",
+      "name": "No action",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        960,
+        220
+      ]
+    }
+  ],
+  "connections": {
+    "Manual run": {
+      "main": [
+        [
+          {
+            "node": "Sample data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Every morning (live trigger)": {
+      "main": [
+        [
+          {
+            "node": "Sample data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sample data": {
+      "main": [
+        [
+          {
+            "node": "Rules",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rules": {
+      "main": [
+        [
+          {
+            "node": "Needs action?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Needs action?": {
+      "main": [
+        [
+          {
+            "node": "Draft message (mock AI)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No action",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Draft message (mock AI)": {
+      "main": [
+        [
+          {
+            "node": "Owner approval (placeholder)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Owner approval (placeholder)": {
+      "main": [
+        [
+          {
+            "node": "Send (placeholder)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send (placeholder)": {
+      "main": [
+        [
+          {
+            "node": "Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "tags": []
+}

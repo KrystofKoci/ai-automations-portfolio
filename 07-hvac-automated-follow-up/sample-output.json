@@ -1,0 +1,54 @@
+{
+  "skipped": [
+    {
+      "id": "Q-502",
+      "reason": "quote sent recently"
+    },
+    {
+      "id": "Q-503",
+      "reason": "quote accepted"
+    },
+    {
+      "id": "S-302",
+      "reason": "serviced recently"
+    }
+  ],
+  "drafts": [
+    {
+      "id": "Q-501",
+      "reason": "quote unanswered for 4 days",
+      "to": "rob@example.com",
+      "subject": "Your quote: heat pump installation",
+      "approval": "auto_send",
+      "message": "Hi Rob, I wanted to check you received our quote for the heat pump installation. Any questions about the price or timing? Reply here and I will answer the same day. This message was prepared by an automated assistant."
+    },
+    {
+      "id": "S-301",
+      "reason": "annual maintenance due",
+      "to": "jill@example.com",
+      "subject": "Yearly service for your boiler",
+      "approval": "auto_send",
+      "message": "Hi Jill, your boiler is due for its yearly service. Reply with a day that suits you and we will send a technician. This message was prepared by an automated assistant."
+    }
+  ],
+  "log": [
+    {
+      "logged_at": "2026-11-19T14:38:23.858Z",
+      "automation": "07-hvac-automated-follow-up",
+      "record_id": "Q-501",
+      "to": "rob@example.com",
+      "subject": "Your quote: heat pump installation",
+      "approval": "auto_send",
+      "status": "draft_ready"
+    },
+    {
+      "logged_at": "2026-11-19T14:38:23.858Z",
+      "automation": "07-hvac-automated-follow-up",
+      "record_id": "S-301",
+      "to": "jill@example.com",
+      "subject": "Yearly service for your boiler",
+      "approval": "auto_send",
+      "status": "draft_ready"
+    }
+  ]
+}

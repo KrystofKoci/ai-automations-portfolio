@@ -1,0 +1,63 @@
+{
+  "skipped": [
+    {
+      "id": "INQ-004",
+      "reason": "sales pitch, not a client"
+    }
+  ],
+  "drafts": [
+    {
+      "id": "INQ-001",
+      "reason": "new client inquiry",
+      "to": "dana@example.com",
+      "subject": "We received your inquiry",
+      "approval": "auto_send_ack",
+      "message": "Hi Dana, thank you for contacting Harlow & Reed. Your message has reached our personal injury team. A lawyer will reply within one business day. To prepare, please reply with any documents or dates you already have. This message was prepared by an automated assistant. It is not legal advice."
+    },
+    {
+      "id": "INQ-002",
+      "reason": "new client inquiry",
+      "to": "marcus@example.com",
+      "subject": "We received your inquiry",
+      "approval": "notify_owner_now",
+      "message": "Hi Marcus, thank you for contacting Harlow & Reed. Your message has reached our commercial team. Because your matter is time-sensitive, a lawyer will call you today. To prepare, please reply with any documents or dates you already have. This message was prepared by an automated assistant. It is not legal advice."
+    },
+    {
+      "id": "INQ-003",
+      "reason": "new client inquiry",
+      "to": "priya@example.com",
+      "subject": "We received your inquiry",
+      "approval": "notify_owner_now",
+      "message": "Hi Priya, thank you for contacting Harlow & Reed. Your message has reached our housing team. Because your matter is time-sensitive, a lawyer will call you today. To prepare, please reply with any documents or dates you already have. This message was prepared by an automated assistant. It is not legal advice."
+    }
+  ],
+  "log": [
+    {
+      "logged_at": "2026-11-19T14:38:23.841Z",
+      "automation": "01-law-firm-speed-to-lead",
+      "record_id": "INQ-001",
+      "to": "dana@example.com",
+      "subject": "We received your inquiry",
+      "approval": "auto_send_ack",
+      "status": "draft_ready"
+    },
+    {
+      "logged_at": "2026-11-19T14:38:23.841Z",
+      "automation": "01-law-firm-speed-to-lead",
+      "record_id": "INQ-002",
+      "to": "marcus@example.com",
+      "subject": "We received your inquiry",
+      "approval": "notify_owner_now",
+      "status": "draft_ready"
+    },
+    {
+      "logged_at": "2026-11-19T14:38:23.841Z",
+      "automation": "01-law-firm-speed-to-lead",
+      "record_id": "INQ-003",
+      "to": "priya@example.com",
+      "subject": "We received your inquiry",
+      "approval": "notify_owner_now",
+      "status": "draft_ready"
+    }
+  ]
+}

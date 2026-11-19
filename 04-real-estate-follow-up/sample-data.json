@@ -1,0 +1,47 @@
+[
+  {
+    "id": "L-201",
+    "name": "Grace Mills",
+    "email": "grace@example.com",
+    "interest": "2-bed condo, downtown",
+    "first_contact": "2026-11-18",
+    "touches": 0,
+    "replied": false
+  },
+  {
+    "id": "L-202",
+    "name": "Ivan Petrov",
+    "email": "ivan@example.com",
+    "interest": "family house with garden",
+    "first_contact": "2026-11-16",
+    "touches": 1,
+    "replied": false
+  },
+  {
+    "id": "L-203",
+    "name": "Sara Cole",
+    "email": "sara@example.com",
+    "interest": "investment studio",
+    "first_contact": "2026-11-11",
+    "touches": 2,
+    "replied": false
+  },
+  {
+    "id": "L-204",
+    "name": "Paul Reyes",
+    "email": "paul@example.com",
+    "interest": "3-bed townhouse",
+    "first_contact": "2026-11-15",
+    "touches": 1,
+    "replied": true
+  },
+  {
+    "id": "L-205",
+    "name": "Kim Tran",
+    "email": "kim@example.com",
+    "interest": "2-bed condo, downtown",
+    "first_contact": "2026-11-17",
+    "touches": 1,
+    "replied": false
+  }
+]

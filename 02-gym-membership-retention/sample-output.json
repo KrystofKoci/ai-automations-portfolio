@@ -1,0 +1,67 @@
+{
+  "skipped": [
+    {
+      "id": "M-101",
+      "reason": "active member"
+    },
+    {
+      "id": "M-104",
+      "reason": "active member"
+    }
+  ],
+  "drafts": [
+    {
+      "id": "M-102",
+      "reason": "16 days without a visit",
+      "to": "aisha@example.com",
+      "subject": "We miss you at Ironside",
+      "approval": "auto_send",
+      "message": "Hi Aisha, we have not seen you at Ironside for 16 days and wanted to check in. Is there a class or time slot that would suit you better? Just reply to this email. This message was prepared by an automated assistant."
+    },
+    {
+      "id": "M-103",
+      "reason": "34 days without a visit",
+      "to": "luis@example.com",
+      "subject": "We miss you at Ironside",
+      "approval": "owner_approves",
+      "message": "Hi Luis, we have not seen you at Ironside for 34 days and wanted to check in. Would a free session with a coach help you get back into it? Reply YES and we will book it. This message was prepared by an automated assistant."
+    },
+    {
+      "id": "M-105",
+      "reason": "21 days without a visit",
+      "to": "ben@example.com",
+      "subject": "We miss you at Ironside",
+      "approval": "auto_send",
+      "message": "Hi Ben, we have not seen you at Ironside for 21 days and wanted to check in. Is there a class or time slot that would suit you better? Just reply to this email. This message was prepared by an automated assistant."
+    }
+  ],
+  "log": [
+    {
+      "logged_at": "2026-11-19T14:38:23.853Z",
+      "automation": "02-gym-membership-retention",
+      "record_id": "M-102",
+      "to": "aisha@example.com",
+      "subject": "We miss you at Ironside",
+      "approval": "auto_send",
+      "status": "draft_ready"
+    },
+    {
+      "logged_at": "2026-11-19T14:38:23.853Z",
+      "automation": "02-gym-membership-retention",
+      "record_id": "M-103",
+      "to": "luis@example.com",
+      "subject": "We miss you at Ironside",
+      "approval": "owner_approves",
+      "status": "draft_ready"
+    },
+    {
+      "logged_at": "2026-11-19T14:38:23.853Z",
+      "automation": "02-gym-membership-retention",
+      "record_id": "M-105",
+      "to": "ben@example.com",
+      "subject": "We miss you at Ironside",
+      "approval": "auto_send",
+      "status": "draft_ready"
+    }
+  ]
+}

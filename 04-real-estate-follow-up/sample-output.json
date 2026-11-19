@@ -1,0 +1,67 @@
+{
+  "skipped": [
+    {
+      "id": "L-204",
+      "reason": "lead replied, sequence stopped"
+    },
+    {
+      "id": "L-205",
+      "reason": "next step not due yet"
+    }
+  ],
+  "drafts": [
+    {
+      "id": "L-201",
+      "reason": "day 1 follow-up due",
+      "to": "grace@example.com",
+      "subject": "Your search: 2-bed condo, downtown",
+      "approval": "auto_send",
+      "message": "Hi Grace, thanks for your interest in a 2-bed condo, downtown. I have two listings that match. Would you like the details or a viewing this week? This message was prepared by an automated assistant."
+    },
+    {
+      "id": "L-202",
+      "reason": "day 3 follow-up due",
+      "to": "ivan@example.com",
+      "subject": "Your search: family house with garden",
+      "approval": "auto_send",
+      "message": "Hi Ivan, a new family house with garden just came up and I thought of you. Shall I send the photos? This message was prepared by an automated assistant."
+    },
+    {
+      "id": "L-203",
+      "reason": "day 7 follow-up due",
+      "to": "sara@example.com",
+      "subject": "Your search: investment studio",
+      "approval": "auto_send",
+      "message": "Hi Sara, I do not want to crowd your inbox, so this is my last note for now. If the investment studio search is still on, reply any time and I will pick it up. This message was prepared by an automated assistant."
+    }
+  ],
+  "log": [
+    {
+      "logged_at": "2026-11-19T14:38:23.855Z",
+      "automation": "04-real-estate-follow-up",
+      "record_id": "L-201",
+      "to": "grace@example.com",
+      "subject": "Your search: 2-bed condo, downtown",
+      "approval": "auto_send",
+      "status": "draft_ready"
+    },
+    {
+      "logged_at": "2026-11-19T14:38:23.855Z",
+      "automation": "04-real-estate-follow-up",
+      "record_id": "L-202",
+      "to": "ivan@example.com",
+      "subject": "Your search: family house with garden",
+      "approval": "auto_send",
+      "status": "draft_ready"
+    },
+    {
+      "logged_at": "2026-11-19T14:38:23.855Z",
+      "automation": "04-real-estate-follow-up",
+      "record_id": "L-203",
+      "to": "sara@example.com",
+      "subject": "Your search: investment studio",
+      "approval": "auto_send",
+      "status": "draft_ready"
+    }
+  ]
+}

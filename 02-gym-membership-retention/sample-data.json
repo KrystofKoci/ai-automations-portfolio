@@ -1,0 +1,42 @@
+[
+  {
+    "id": "M-101",
+    "name": "Tom Becker",
+    "email": "tom@example.com",
+    "plan": "monthly",
+    "last_visit": "2026-11-16",
+    "visits_last_30d": 9
+  },
+  {
+    "id": "M-102",
+    "name": "Aisha Khan",
+    "email": "aisha@example.com",
+    "plan": "monthly",
+    "last_visit": "2026-11-03",
+    "visits_last_30d": 2
+  },
+  {
+    "id": "M-103",
+    "name": "Luis Ortega",
+    "email": "luis@example.com",
+    "plan": "annual",
+    "last_visit": "2026-10-16",
+    "visits_last_30d": 0
+  },
+  {
+    "id": "M-104",
+    "name": "Nora Lind",
+    "email": "nora@example.com",
+    "plan": "monthly",
+    "last_visit": "2026-11-18",
+    "visits_last_30d": 14
+  },
+  {
+    "id": "M-105",
+    "name": "Ben Carter",
+    "email": "ben@example.com",
+    "plan": "monthly",
+    "last_visit": "2026-10-29",
+    "visits_last_30d": 1
+  }
+]

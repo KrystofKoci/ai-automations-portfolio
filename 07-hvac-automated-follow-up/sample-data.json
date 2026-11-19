@@ -1,0 +1,48 @@
+[
+  {
+    "id": "Q-501",
+    "type": "quote",
+    "name": "Rob Hale",
+    "email": "rob@example.com",
+    "job": "heat pump installation",
+    "amount": 8400,
+    "sent": "2026-11-15",
+    "status": "sent"
+  },
+  {
+    "id": "Q-502",
+    "type": "quote",
+    "name": "Eva Stone",
+    "email": "eva@example.com",
+    "job": "AC replacement",
+    "amount": 5200,
+    "sent": "2026-11-18",
+    "status": "sent"
+  },
+  {
+    "id": "Q-503",
+    "type": "quote",
+    "name": "Dan Price",
+    "email": "dan@example.com",
+    "job": "furnace repair",
+    "amount": 650,
+    "sent": "2026-11-13",
+    "status": "accepted"
+  },
+  {
+    "id": "S-301",
+    "type": "service",
+    "name": "Jill Moore",
+    "email": "jill@example.com",
+    "job": "boiler",
+    "last_service": "2025-12-04"
+  },
+  {
+    "id": "S-302",
+    "type": "service",
+    "name": "Ken Abe",
+    "email": "ken@example.com",
+    "job": "AC unit",
+    "last_service": "2026-07-22"
+  }
+]

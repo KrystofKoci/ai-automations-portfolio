@@ -1,0 +1,46 @@
+{
+  "skipped": [
+    {
+      "id": "S-3",
+      "reason": "no consenting client for this treatment"
+    }
+  ],
+  "drafts": [
+    {
+      "id": "S-1",
+      "reason": "waitlist match",
+      "to": "elena@example.com",
+      "subject": "A facial slot just opened",
+      "approval": "auto_send",
+      "message": "Hi Elena, a facial appointment has opened at Lumen on 2026-11-20 at 14:00. Reply YES to take it and we will confirm. This message was prepared by an automated assistant. Reply STOP to opt out."
+    },
+    {
+      "id": "S-2",
+      "reason": "lapsed 120 days",
+      "to": "tess@example.com",
+      "subject": "A laser slot just opened",
+      "approval": "auto_send",
+      "message": "Hi Tess, a laser appointment has opened at Lumen on 2026-11-21 at 10:30. Reply YES to take it and we will confirm. This message was prepared by an automated assistant. Reply STOP to opt out."
+    }
+  ],
+  "log": [
+    {
+      "logged_at": "2026-11-19T14:38:23.856Z",
+      "automation": "05-med-spa-full-calendar",
+      "record_id": "S-1",
+      "to": "elena@example.com",
+      "subject": "A facial slot just opened",
+      "approval": "auto_send",
+      "status": "draft_ready"
+    },
+    {
+      "logged_at": "2026-11-19T14:38:23.856Z",
+      "automation": "05-med-spa-full-calendar",
+      "record_id": "S-2",
+      "to": "tess@example.com",
+      "subject": "A laser slot just opened",
+      "approval": "auto_send",
+      "status": "draft_ready"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "INQ-001",
+    "received_at": "2026-11-19T14:38:03.833Z",
+    "name": "Dana Whitfield",
+    "email": "dana@example.com",
+    "message": "I was rear-ended last week and the insurer is refusing to pay. Can you help?"
+  },
+  {
+    "id": "INQ-002",
+    "received_at": "2026-11-19T14:37:48.839Z",
+    "name": "Marcus Lee",
+    "email": "marcus@example.com",
+    "message": "We need a commercial lease reviewed before Friday."
+  },
+  {
+    "id": "INQ-003",
+    "received_at": "2026-11-19T14:38:11.839Z",
+    "name": "Priya Nair",
+    "email": "priya@example.com",
+    "message": "My landlord is trying to evict me and the hearing is tomorrow morning."
+  },
+  {
+    "id": "INQ-004",
+    "received_at": "2026-11-19T14:37:33.839Z",
+    "name": "SEO Partners",
+    "email": "sales@example.org",
+    "message": "We offer link building packages for law firms."
+  }
+]

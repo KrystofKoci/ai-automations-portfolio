@@ -1,0 +1,255 @@
+{
+  "name": "Law firm - Speed to lead",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Law firm - Speed to lead\n**Sells:** Speed\n\nEvery new inquiry gets a useful first reply in under a minute, is sorted by practice area and flagged when urgent.\n\nRun *Manual run* to execute on the built-in sample data. No credentials needed.\n\nTo go live: replace *Sample data* with the real source, *Draft message* with an LLM call, and the placeholder nodes with real send / approval steps.",
+        "height": 240,
+        "width": 620
+      },
+      "id": "15e4e095-3889-5595-8fc2-1af1ff25d309",
+      "name": "About",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -280
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "30b7d8ba-54ed-5649-b351-30e7134fdf04",
+      "name": "Manual run",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "law-firm-inquiry",
+        "options": {}
+      },
+      "id": "af7f3e58-817e-5385-8081-92e59a54cc16",
+      "name": "Webhook (live trigger)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        0,
+        200
+      ],
+      "webhookId": "d06e5e85-2f9f-5c67-ab50-5321222eaf48"
+    },
+    {
+      "parameters": {
+        "jsCode": "const d = n => new Date(Date.now() - n*86400000).toISOString().slice(0,10);\nconst daysSince = s => Math.floor((Date.now() - new Date(s).getTime())/86400000);\nconst ago = s => new Date(Date.now() - s*1000).toISOString();\nreturn [\n {id:'INQ-001', received_at:ago(20), name:'Dana Whitfield', email:'dana@example.com', message:'I was rear-ended last week and the insurer is refusing to pay. Can you help?'},\n {id:'INQ-002', received_at:ago(35), name:'Marcus Lee', email:'marcus@example.com', message:'We need a commercial lease reviewed before Friday.'},\n {id:'INQ-003', received_at:ago(12), name:'Priya Nair', email:'priya@example.com', message:'My landlord is trying to evict me and the hearing is tomorrow morning.'},\n {id:'INQ-004', received_at:ago(50), name:'SEO Partners', email:'sales@example.org', message:'We offer link building packages for law firms.'}\n].map(json => ({json}));"
+      },
+      "id": "125fdf04-bc2d-50d0-b103-9f30d6c17f1e",
+      "name": "Sample data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const AREAS = [\n ['personal_injury', /accident|rear-ended|injur|insurer/i],\n ['commercial', /lease|contract|company|commercial/i],\n ['housing', /landlord|evict|tenant|rent/i],\n ['not_a_client', /we offer|packages|link building|partnership/i]\n];\nreturn $input.all().map(({json}) => {\n const hit = AREAS.find(([, re]) => re.test(json.message));\n const area = hit ? hit[0] : 'general';\n const urgent = /tomorrow|today|urgent|hearing|deadline|friday/i.test(json.message);\n const response_time_seconds = Math.round((Date.now() - new Date(json.received_at).getTime())/1000);\n return {json: {...json, area, urgent, response_time_seconds, needs_action: area !== 'not_a_client', reason: area === 'not_a_client' ? 'sales pitch, not a client' : 'new client inquiry'}};\n});"
+      },
+      "id": "ea08e950-5ae0-5095-b6c0-b2cbd67299aa",
+      "name": "Rules",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.needs_action }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "1f74423c-0309-55c0-abdc-2c8be19f1f92",
+      "name": "Needs action?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        720,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const TEAM = {personal_injury:'personal injury', commercial:'commercial', housing:'housing', general:'intake'};\nreturn $input.all().map(({json}) => {\n const first = json.name.split(' ')[0];\n const next = json.urgent ? 'Because your matter is time-sensitive, a lawyer will call you today.' : 'A lawyer will reply within one business day.';\n const message = `Hi ${first}, thank you for contacting Harlow & Reed. Your message has reached our ${TEAM[json.area]} team. ${next} To prepare, please reply with any documents or dates you already have. This message was prepared by an automated assistant. It is not legal advice.`;\n return {json: {...json, channel:'email', to: json.email, subject:'We received your inquiry', message, approval: json.urgent ? 'notify_owner_now' : 'auto_send_ack'}};\n});"
+      },
+      "id": "dd5d9b5d-2fdc-541e-9a6c-be8a55976e04",
+      "name": "Draft message (mock AI)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        0
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "7c4cfddb-3af5-58db-8303-2a524ca30aa7",
+      "name": "Owner approval (placeholder)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        0
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "54688bd4-7d03-56a0-b33f-b5a34cc8bc8f",
+      "name": "Send (placeholder)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $input.all().map(({json}) => ({json: {logged_at: new Date().toISOString(), automation: '01-law-firm-speed-to-lead', record_id: json.id, to: json.to || null, subject: json.subject, approval: json.approval, status: 'draft_ready'}}));"
+      },
+      "id": "5560dd1a-6559-52c6-b518-930639af94f8",
+      "name": "Log",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1680,
+        0
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "0af1d4f6-a877-5d4e-9e36-438abb206617",
+      "name": "No action",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        960,
+        220
+      ]
+    }
+  ],
+  "connections": {
+    "Manual run": {
+      "main": [
+        [
+          {
+            "node": "Sample data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook (live trigger)": {
+      "main": [
+        [
+          {
+            "node": "Sample data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sample data": {
+      "main": [
+        [
+          {
+            "node": "Rules",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rules": {
+      "main": [
+        [
+          {
+            "node": "Needs action?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Needs action?": {
+      "main": [
+        [
+          {
+            "node": "Draft message (mock AI)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No action",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Draft message (mock AI)": {
+      "main": [
+        [
+          {
+            "node": "Owner approval (placeholder)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Owner approval (placeholder)": {
+      "main": [
+        [
+          {
+            "node": "Send (placeholder)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send (placeholder)": {
+      "main": [
+        [
+          {
+            "node": "Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "tags": []
+}

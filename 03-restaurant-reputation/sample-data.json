@@ -1,0 +1,38 @@
+[
+  {
+    "id": "R-01",
+    "source": "google",
+    "author": "Helen P.",
+    "rating": 5,
+    "text": "Best carbonara in town and lovely staff.",
+    "posted": "2026-11-19",
+    "replied": false
+  },
+  {
+    "id": "R-02",
+    "source": "google",
+    "author": "Jon S.",
+    "rating": 2,
+    "text": "Waited 50 minutes for mains and nobody apologised.",
+    "posted": "2026-11-19",
+    "replied": false
+  },
+  {
+    "id": "R-03",
+    "source": "tripadvisor",
+    "author": "Mia K.",
+    "rating": 4,
+    "text": "Great food, a bit loud on Friday night.",
+    "posted": "2026-11-18",
+    "replied": false
+  },
+  {
+    "id": "R-04",
+    "source": "google",
+    "author": "Omar D.",
+    "rating": 5,
+    "text": "Perfect anniversary dinner.",
+    "posted": "2026-11-13",
+    "replied": true
+  }
+]

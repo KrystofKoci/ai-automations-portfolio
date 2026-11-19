@@ -1,0 +1,42 @@
+[
+  {
+    "id": "P-01",
+    "name": "Olga Novak",
+    "email": "olga@example.com",
+    "last_checkup": "2026-05-03",
+    "has_future_booking": false,
+    "contact_ok": true
+  },
+  {
+    "id": "P-02",
+    "name": "Sam Reid",
+    "email": "sam@example.com",
+    "last_checkup": "2026-08-21",
+    "has_future_booking": false,
+    "contact_ok": true
+  },
+  {
+    "id": "P-03",
+    "name": "Lena Fox",
+    "email": "lena@example.com",
+    "last_checkup": "2026-03-04",
+    "has_future_booking": true,
+    "contact_ok": true
+  },
+  {
+    "id": "P-04",
+    "name": "Hugo Blanc",
+    "email": "hugo@example.com",
+    "last_checkup": "2025-10-15",
+    "has_future_booking": false,
+    "contact_ok": true
+  },
+  {
+    "id": "P-05",
+    "name": "Ida Moss",
+    "email": "ida@example.com",
+    "last_checkup": "2026-01-13",
+    "has_future_booking": false,
+    "contact_ok": false
+  }
+]

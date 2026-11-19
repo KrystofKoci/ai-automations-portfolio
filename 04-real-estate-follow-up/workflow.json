@@ -1,0 +1,256 @@
+{
+  "name": "Real estate - Lead follow-up",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Real estate - Lead follow-up\n**Sells:** Follow-up\n\nFollows up every buyer lead on day 1, 3 and 7 and stops the moment the lead replies.\n\nRun *Manual run* to execute on the built-in sample data. No credentials needed.\n\nTo go live: replace *Sample data* with the real source, *Draft message* with an LLM call, and the placeholder nodes with real send / approval steps.",
+        "height": 240,
+        "width": 620
+      },
+      "id": "15e4e095-3889-5595-8fc2-1af1ff25d309",
+      "name": "About",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -280
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "30b7d8ba-54ed-5649-b351-30e7134fdf04",
+      "name": "Manual run",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {}
+          ]
+        }
+      },
+      "id": "d104d14e-e5e0-513b-9d56-8d6087c16de6",
+      "name": "Every morning (live trigger)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const d = n => new Date(Date.now() - n*86400000).toISOString().slice(0,10);\nconst daysSince = s => Math.floor((Date.now() - new Date(s).getTime())/86400000);\nreturn [\n {id:'L-201', name:'Grace Mills', email:'grace@example.com', interest:'2-bed condo, downtown', first_contact:d(1), touches:0, replied:false},\n {id:'L-202', name:'Ivan Petrov', email:'ivan@example.com', interest:'family house with garden', first_contact:d(3), touches:1, replied:false},\n {id:'L-203', name:'Sara Cole', email:'sara@example.com', interest:'investment studio', first_contact:d(8), touches:2, replied:false},\n {id:'L-204', name:'Paul Reyes', email:'paul@example.com', interest:'3-bed townhouse', first_contact:d(4), touches:1, replied:true},\n {id:'L-205', name:'Kim Tran', email:'kim@example.com', interest:'2-bed condo, downtown', first_contact:d(2), touches:1, replied:false}\n].map(json => ({json}));"
+      },
+      "id": "125fdf04-bc2d-50d0-b103-9f30d6c17f1e",
+      "name": "Sample data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const d = n => new Date(Date.now() - n*86400000).toISOString().slice(0,10);\nconst daysSince = s => Math.floor((Date.now() - new Date(s).getTime())/86400000);\nconst CADENCE = [1, 3, 7];\nreturn $input.all().map(({json}) => {\n const days = daysSince(json.first_contact);\n const due = !json.replied && json.touches < CADENCE.length && days >= CADENCE[json.touches];\n const reason = json.replied ? 'lead replied, sequence stopped' : json.touches >= CADENCE.length ? 'sequence finished' : due ? `day ${CADENCE[json.touches]} follow-up due` : 'next step not due yet';\n return {json: {...json, days_since_first_contact: days, step: json.touches + 1, needs_action: due, reason}};\n});"
+      },
+      "id": "ea08e950-5ae0-5095-b6c0-b2cbd67299aa",
+      "name": "Rules",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.needs_action }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "1f74423c-0309-55c0-abdc-2c8be19f1f92",
+      "name": "Needs action?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        720,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const TEXT = [\n j => `thanks for your interest in a ${j.interest}. I have two listings that match. Would you like the details or a viewing this week?`,\n j => `a new ${j.interest} just came up and I thought of you. Shall I send the photos?`,\n j => `I do not want to crowd your inbox, so this is my last note for now. If the ${j.interest} search is still on, reply any time and I will pick it up.`\n];\nreturn $input.all().map(({json}) => {\n const first = json.name.split(' ')[0];\n const message = `Hi ${first}, ${TEXT[json.step - 1](json)} This message was prepared by an automated assistant.`;\n return {json: {...json, channel:'email', to: json.email, subject:`Your search: ${json.interest}`, message, approval:'auto_send'}};\n});"
+      },
+      "id": "dd5d9b5d-2fdc-541e-9a6c-be8a55976e04",
+      "name": "Draft message (mock AI)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        0
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "7c4cfddb-3af5-58db-8303-2a524ca30aa7",
+      "name": "Owner approval (placeholder)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        0
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "54688bd4-7d03-56a0-b33f-b5a34cc8bc8f",
+      "name": "Send (placeholder)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $input.all().map(({json}) => ({json: {logged_at: new Date().toISOString(), automation: '04-real-estate-follow-up', record_id: json.id, to: json.to || null, subject: json.subject, approval: json.approval, status: 'draft_ready'}}));"
+      },
+      "id": "5560dd1a-6559-52c6-b518-930639af94f8",
+      "name": "Log",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1680,
+        0
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "0af1d4f6-a877-5d4e-9e36-438abb206617",
+      "name": "No action",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        960,
+        220
+      ]
+    }
+  ],
+  "connections": {
+    "Manual run": {
+      "main": [
+        [
+          {
+            "node": "Sample data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Every morning (live trigger)": {
+      "main": [
+        [
+          {
+            "node": "Sample data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sample data": {
+      "main": [
+        [
+          {
+            "node": "Rules",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rules": {
+      "main": [
+        [
+          {
+            "node": "Needs action?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Needs action?": {
+      "main": [
+        [
+          {
+            "node": "Draft message (mock AI)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No action",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Draft message (mock AI)": {
+      "main": [
+        [
+          {
+            "node": "Owner approval (placeholder)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Owner approval (placeholder)": {
+      "main": [
+        [
+          {
+            "node": "Send (placeholder)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send (placeholder)": {
+      "main": [
+        [
+          {
+            "node": "Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "tags": []
+}

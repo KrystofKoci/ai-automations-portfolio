@@ -1,0 +1,71 @@
+[
+  {
+    "open_slots": [
+      {
+        "slot_id": "S-1",
+        "date": "2026-11-20",
+        "time": "14:00",
+        "treatment": "facial"
+      },
+      {
+        "slot_id": "S-2",
+        "date": "2026-11-21",
+        "time": "10:30",
+        "treatment": "laser"
+      },
+      {
+        "slot_id": "S-3",
+        "date": "2026-11-21",
+        "time": "16:00",
+        "treatment": "massage"
+      }
+    ],
+    "clients": [
+      {
+        "id": "C-1",
+        "name": "Elena Ruiz",
+        "email": "elena@example.com",
+        "treatment": "facial",
+        "waitlist": true,
+        "last_visit": "2026-10-30",
+        "marketing_ok": true
+      },
+      {
+        "id": "C-2",
+        "name": "Joan Hart",
+        "email": "joan@example.com",
+        "treatment": "facial",
+        "waitlist": false,
+        "last_visit": "2026-08-16",
+        "marketing_ok": true
+      },
+      {
+        "id": "C-3",
+        "name": "Tess Wu",
+        "email": "tess@example.com",
+        "treatment": "laser",
+        "waitlist": false,
+        "last_visit": "2026-07-22",
+        "marketing_ok": true
+      },
+      {
+        "id": "C-4",
+        "name": "Rita Shaw",
+        "email": "rita@example.com",
+        "treatment": "laser",
+        "waitlist": false,
+        "last_visit": "2026-05-03",
+        "marketing_ok": false
+      },
+      {
+        "id": "C-5",
+        "name": "Amy Diaz",
+        "email": "amy@example.com",
+        "treatment": "peel",
+        "waitlist": true,
+        "last_visit": "2026-10-10",
+        "marketing_ok": true
+      }
+    ]
+  }
+]
